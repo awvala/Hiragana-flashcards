@@ -29,7 +29,7 @@ class App extends Component {
   state = {
     begin: false,
     shuffledHiraCards: [],
-    shuffledAnswerCards: [],
+    shuffledEnglCards: [],
     result: "",
     correct: 0,
     score: 0,
@@ -43,10 +43,28 @@ class App extends Component {
 
     if (this.state.begin === false) {
       this.setState({
-        begin: true
+        begin: true,
       });
     };
   };
+
+  // Fisher Yates shuffle array
+ shuffleArray = paramArray => {
+    let remaining = paramArray.length, tempIndex, i;
+  
+    // While there remain elements to shuffle…
+    while (remaining) {
+  
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * remaining--);
+  
+      // And swap it with the current element.
+      tempIndex = paramArray[remaining];
+      paramArray[remaining] = paramArray[i];
+      paramArray[i] = tempIndex;
+    }
+    return paramArray;
+  }
 
   render() {
     return (
@@ -64,7 +82,7 @@ class App extends Component {
               <div className="col-sm-5">
                 {/*Hiragana cards*/}
                 <CardContainer>
-                  {this.state.shuffledHiraCards.map((card, index) => <FlashCard
+                  {initCardsArr.map((card, index) => <FlashCard
                     name={card[0]}
                     id={card.index}
                     status="unmatched"
@@ -76,7 +94,7 @@ class App extends Component {
               <div className="col-sm-5">
                 {/*English cards*/}
                 <CardContainer>
-                  {this.state.shuffledAnswerCards.map((card, index) => <AnswerCard
+                  {initCardsArr.map((card, index) => <AnswerCard
                     name={card[1]}
                     id={card.index}
                     status="unmatched"
@@ -87,7 +105,9 @@ class App extends Component {
               <div className="col-sm-1"></div>
             </div>
             /* else show instructions */
-            : <Instructions />
+            : <Instructions 
+            handleFormSubmit= {this.handleFormSubmit}
+            />
         }
       </div>
     );
