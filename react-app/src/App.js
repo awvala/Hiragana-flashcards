@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from "./components/Nav";
 import CardContainer from "./components/CardContainer";
+import Instructions from "./components/Instructions";
 import FlashCard from "./components/FlashCard";
 import AnswerCard from "./components/AnswerCard";
 
@@ -26,11 +27,26 @@ const shuffleCardArr = [];
 class App extends Component {
   // Set Initial state
   state = {
+    begin: false,
+    shuffledHiraCards: [],
+    shuffledAnswerCards: [],
     result: "",
     correct: 0,
     score: 0,
     pendingID: ""
   }
+
+  // Click the begin button to remove the Begin button and show the Cards matched counter
+  handleFormSubmit = event => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+      event.preventDefault();
+
+    if (this.state.begin === false) {
+      this.setState({
+        begin: true
+      });
+    };
+  };
 
   render() {
     return (
@@ -40,33 +56,39 @@ class App extends Component {
           correct={this.state.correct}
           score={this.state.score}
         />
-        <div className="row">
-        <div className="col-sm-1"></div>
-          <div className="col-sm-5">
-            {/*Hiragana cards*/}
-            <CardContainer>
-              {initCardsArr.map((card, index) => <FlashCard
-                name={card[0]}
-                id={card.index}
-                status="unmatched"
-              />
-              )}
-            </CardContainer>
-          </div>
-          
-          <div className="col-sm-5">
-            {/*English cards*/}
-            <CardContainer>
-              {initCardsArr.map((card, index) => <AnswerCard
-                name={card[1]}
-                id={card.index}
-                status="unmatched"
-              />
-              )}
-            </CardContainer>
-          </div>
-          <div className="col-sm-1"></div>
-        </div>
+
+        { // Ternarry to conditionally show welcome message or populated flashcards
+          this.state.begin === true
+            ? <div className="row">
+              <div className="col-sm-1"></div>
+              <div className="col-sm-5">
+                {/*Hiragana cards*/}
+                <CardContainer>
+                  {this.state.shuffledHiraCards.map((card, index) => <FlashCard
+                    name={card[0]}
+                    id={card.index}
+                    status="unmatched"
+                  />
+                  )}
+                </CardContainer>
+              </div>
+
+              <div className="col-sm-5">
+                {/*English cards*/}
+                <CardContainer>
+                  {this.state.shuffledAnswerCards.map((card, index) => <AnswerCard
+                    name={card[1]}
+                    id={card.index}
+                    status="unmatched"
+                  />
+                  )}
+                </CardContainer>
+              </div>
+              <div className="col-sm-1"></div>
+            </div>
+            /* else show instructions */
+            : <Instructions />
+        }
       </div>
     );
   }
