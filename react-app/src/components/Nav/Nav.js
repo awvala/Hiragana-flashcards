@@ -8,10 +8,6 @@ class Nav extends Component {
         score: 0
     };
 
-    componentDidMount () {
-        this.state.beging
-    }
-
     // Click the begin button to remove the Begin button and show the Cards matched counter
     handleFormSubmit = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
@@ -21,7 +17,6 @@ class Nav extends Component {
             this.setState({
                 begin: true
             });
-            
         };
     };
 
@@ -39,9 +34,7 @@ class Nav extends Component {
                             { // Ternarry to conditionally show the begin button or matched cards counter
                                 this.state.begin === false
                                     /* If begin === false*/
-                                    ? 
-                                        <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>Begin!</button>
-                                    
+                                    ? <button type="submit" className="btn btn-primary" onClick={this.handleFormSubmit}>Begin!</button>
                                     /* else begin != false*/
                                     : <div className="second-nav">
                                         <span class="navbar-text">{this.state.result}</span>
