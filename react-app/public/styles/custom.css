@@ -1,0 +1,26 @@
+body, html {
+    height: 100%;
+}
+
+body {
+    /* The image used */
+    background-image: url("../images/landscapebg.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.welcomeBanner {
+    text-align: center;
+    width: 80%;
+    margin: 20px auto 50px auto;
+    padding: 20px;
+    background-color: white;
+}
+
