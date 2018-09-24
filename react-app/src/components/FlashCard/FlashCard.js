@@ -1,12 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
 import "./FlashCard.css";
 
-const FlashCard = props => (
-    <div className="fcard">
-        <div className=" rounded" id={props.id} data-status={props.status}>
-            <p>{props.name}</p>
-        </div>
-    </div>
-);
+class FlashCard extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+
+        return (
+            <div
+                className={`fcard ${this.props.status}`}
+                id={this.props.id}
+                onClick={() => this.props.handleClick(this.props.id)}
+            >
+                <div className="rounded">
+                    <p>{this.props.name}</p>
+                </div>
+            </div>
+        )
+    };
+}
 
 export default FlashCard;

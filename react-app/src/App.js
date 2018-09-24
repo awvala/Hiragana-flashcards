@@ -5,7 +5,7 @@ import Instructions from "./components/Instructions";
 import FlashCard from "./components/FlashCard";
 import AnswerCard from "./components/AnswerCard";
 
-const initCardsArr = [["あ", "a"], ["い", "i"], ["う", "u"], ["え", "e"], ["お", "i"],
+const initCardsArr = [["あ", "a"], ["い", "i"], ["う", "u"], ["え", "e"], ["お", "o"],
 ["か", "ka"], ["き", "ki"], ["く", "ku"], ["け", "ke"], ["こ", "ko"],
 ["さ", "sa"], ["し", "shi"], ["す", "su"], ["せ", "se"], ["そ", "so"],
 ["た", "ta"], ["ち", "chi"], ["つ", "tsu"], ["て", "te"], ["と", "to"],
@@ -22,49 +22,122 @@ const initCardsArr = [["あ", "a"], ["い", "i"], ["う", "u"], ["え", "e"], ["
 ["ぱ", "pa"], ["ぴ", "pi"], ["ぷ", "pu"], ["ぺ", "pe"], ["ぽ", "po"]
 ];
 
-const shuffleCardArr = [];
+const unshuffledHiraArr = [];
+const unshuffledEnglArr = [];
 
 class App extends Component {
   // Set Initial state
   state = {
+    hiraCards: [],
+    englCards: [],
     begin: false,
-    shuffledHiraCards: [],
-    shuffledEnglCards: [],
     result: "",
     correct: 0,
     score: 0,
     pendingID: ""
   }
 
+  combineNewArray = (newArray) => {
+    let i;
+    for (i = 0; i < newArray.length; i++) {
+      unshuffledHiraArr.push([newArray[i][0], i]);
+      unshuffledEnglArr.push([newArray[i][1], i]);
+    }
+    //console.log(unshuffledArr);
+  };
+
   // Click the begin button to remove the Begin button and show the Cards matched counter
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
-      event.preventDefault();
+    event.preventDefault();
 
     if (this.state.begin === false) {
       this.setState({
         begin: true,
       });
+      // Combine hiragana characters into a single array.
+      this.combineNewArray(initCardsArr);
+      // Shuffle single array
+      let hirashuffledCards = this.shuffleArray(unshuffledHiraArr);
+      let englshuffledCards = this.shuffleArray(unshuffledEnglArr);
+      this.setState({
+        hiraCards: hirashuffledCards,
+        englCards: englshuffledCards,
+        result: ""
+      });
     };
   };
 
   // Fisher Yates shuffle array
- shuffleArray = paramArray => {
-    let remaining = paramArray.length, tempIndex, i;
-  
+  shuffleArray = paramArray => {
+    let currentIndex = paramArray.length, tempValue, randomIndex;
+
     // While there remain elements to shuffle…
-    while (remaining) {
-  
+    while (0 !== currentIndex) {
+
       // Pick a remaining element…
-      i = Math.floor(Math.random() * remaining--);
-  
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
       // And swap it with the current element.
-      tempIndex = paramArray[remaining];
-      paramArray[remaining] = paramArray[i];
-      paramArray[i] = tempIndex;
+      tempValue = paramArray[currentIndex];
+      paramArray[currentIndex] = paramArray[randomIndex];
+      paramArray[randomIndex] = tempValue;
     }
     return paramArray;
-  }
+  };
+
+  handleClick = id => {
+    // Check if pendingId is empty
+    if (this.state.pendingID === "") {
+      // update pendingId and change status to pending
+      alert("here");
+      alert(this.state.pendingID);
+      var element = document.getElementById(id);
+      element.classList.add("pending");
+      this.setState ({
+      pendingID: id
+      });
+    } else if (this.state.pendingID === id) {
+      // Increment score
+      this.handleIncrement();
+      this.setState({
+        pendingID: ""
+      });
+    } else {
+      this.handleReset();
+    }
+  };
+
+  handleIncrement = () => {
+    let newScore = this.state.correct + 1;
+    this.setState({
+      correct: newScore,
+      result: "Correct!",
+    });
+    if (newScore >= this.state.score) {
+      this.setState({
+        score: newScore
+      });
+    } else if (newScore === initCardsArr.length) {
+      this.setState({
+        result: "Well done!"
+      });
+    }
+    this.shuffleArray();
+  };
+
+  handleReset = () => {
+    this.setState({
+      begin: false,
+      shuffledHiraCards: [],
+      shuffledEnglCards: [],
+      result: "Incorrect, try again!",
+      correct: 0,
+      pendingID: ""
+    });
+    this.combineNewArray(initCardsArr);
+  };
 
   render() {
     return (
@@ -82,10 +155,12 @@ class App extends Component {
               <div className="col-sm-5">
                 {/*Hiragana cards*/}
                 <CardContainer>
-                  {initCardsArr.map((card, index) => <FlashCard
+                  {this.state.hiraCards.map((card) => <FlashCard
+                    key = {card[1]}
                     name={card[0]}
-                    id={card.index}
+                    id={card[1]}
                     status="unmatched"
+                    handleClick={this.handleClick}
                   />
                   )}
                 </CardContainer>
@@ -94,10 +169,12 @@ class App extends Component {
               <div className="col-sm-5">
                 {/*English cards*/}
                 <CardContainer>
-                  {initCardsArr.map((card, index) => <AnswerCard
-                    name={card[1]}
-                    id={card.index}
+                  {this.state.englCards.map((card) => <AnswerCard
+                    key = {card[1]}
+                    name={card[0]}
+                    id={card[1]}
                     status="unmatched"
+                    handleClick={this.handleClick}
                   />
                   )}
                 </CardContainer>
@@ -105,8 +182,8 @@ class App extends Component {
               <div className="col-sm-1"></div>
             </div>
             /* else show instructions */
-            : <Instructions 
-            handleFormSubmit= {this.handleFormSubmit}
+            : <Instructions
+              handleFormSubmit={this.handleFormSubmit}
             />
         }
       </div>
