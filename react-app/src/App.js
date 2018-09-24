@@ -156,7 +156,6 @@ class App extends Component {
       correct: 0,
       pendingID: ""
     });
-    //this.combineNewArray(initCardsArr);
   };
 
   render() {
