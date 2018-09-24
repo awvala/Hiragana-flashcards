@@ -65,8 +65,8 @@ class App extends Component {
         englCards: englshuffledCards,
         result: ""
       });
-    } else {
-       console.log("Why is this still running!?")
+      unshuffledHiraArr = [];
+      unshuffledEnglArr = [];
     };
   };
 
@@ -89,25 +89,42 @@ class App extends Component {
     return paramArray;
   };
 
-  handleClick = id => {
+  handleClick = (type,id) => {
     // Check if pendingId is empty
+    var cardId = type+id;
+    var element = document.getElementById(cardId);
+    var matchElement;
+
+    if (type === "a") {
+      matchElement = document.getElementById("f"+id);
+    } else {
+      matchElement = document.getElementById("a"+id);
+    }
+
     if (this.state.pendingID === "") {
       // update pendingId and change status to pending
-      console.log("New id: " + id);
-      var element = document.getElementById(id);
+      //console.log("New id: " + id);
+      // var element = document.getElementById(id);
       element.classList.add("pending");
+      element.classList.remove("unmatched");
       this.setState ({
       pendingID: id
       });
     } else if (this.state.pendingID === id) {
-      // Increment score
-      console.log("Match id: " + this.state.pendingID);
+      // Increment score if there is a match
+      //console.log("Match id: " + this.state.pendingID);
+      element.classList.add("matched");
+      element.classList.remove("unmatched");
+      element.classList.remove("pending");
+      matchElement.classList.add("matched");
+      matchElement.classList.remove("unmatched");
+      matchElement.classList.remove("pending");
       this.handleIncrement();
       this.setState({
         pendingID: ""
       });
     } else {
-      console.log("Not a match, reset board");
+      //console.log("Not a match, reset board");
       this.handleReset();
     }
   };
@@ -133,15 +150,13 @@ class App extends Component {
   handleReset = () => {
     this.setState({
       begin: false,
-      shuffledHiraCards: [],
-      shuffledEnglCards: [],
+      HiraCards: [],
+      EnglCards: [],
       result: "Incorrect, try again!",
       correct: 0,
       pendingID: ""
     });
-    unshuffledHiraArr = [];
-    unshuffledEnglArr = [];
-    this.combineNewArray(initCardsArr);
+    //this.combineNewArray(initCardsArr);
   };
 
   render() {

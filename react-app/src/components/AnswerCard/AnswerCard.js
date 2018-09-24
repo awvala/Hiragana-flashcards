@@ -10,8 +10,9 @@ class AnswerCard extends Component {
         return (
             <div
                 className={`acard ${this.props.status}`}
-                id={this.props.id}
-                onClick={() => this.props.handleClick(this.props.id)}
+                id={`a${this.props.id}`}
+                data-id={this.props.id}
+                onClick={() => this.props.handleClick("a",this.props.id)}
             >
                 <div className="rounded">
                     <p>{this.props.name}</p>

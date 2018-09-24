@@ -11,8 +11,9 @@ class FlashCard extends Component {
         return (
             <div
                 className={`fcard ${this.props.status}`}
-                id={this.props.id}
-                onClick={() => this.props.handleClick(this.props.id)}
+                id={`f${this.props.id}`}
+                data-id={this.props.id}
+                onClick={() => this.props.handleClick("f",this.props.id)}
             >
                 <div className="rounded">
                     <p>{this.props.name}</p>
