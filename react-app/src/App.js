@@ -22,8 +22,8 @@ const initCardsArr = [["あ", "a"], ["い", "i"], ["う", "u"], ["え", "e"], ["
 ["ぱ", "pa"], ["ぴ", "pi"], ["ぷ", "pu"], ["ぺ", "pe"], ["ぽ", "po"]
 ];
 
-const unshuffledHiraArr = [];
-const unshuffledEnglArr = [];
+let unshuffledHiraArr = [];
+let unshuffledEnglArr = [];
 
 class App extends Component {
   // Set Initial state
@@ -43,7 +43,6 @@ class App extends Component {
       unshuffledHiraArr.push([newArray[i][0], i]);
       unshuffledEnglArr.push([newArray[i][1], i]);
     }
-    //console.log(unshuffledArr);
   };
 
   // Click the begin button to remove the Begin button and show the Cards matched counter
@@ -52,6 +51,7 @@ class App extends Component {
     event.preventDefault();
 
     if (this.state.begin === false) {
+      console.log("running handleFormSubmit");
       this.setState({
         begin: true,
       });
@@ -91,8 +91,7 @@ class App extends Component {
     // Check if pendingId is empty
     if (this.state.pendingID === "") {
       // update pendingId and change status to pending
-      alert("here");
-      alert(this.state.pendingID);
+      console.log("New id: " + id);
       var element = document.getElementById(id);
       element.classList.add("pending");
       this.setState ({
@@ -100,6 +99,7 @@ class App extends Component {
       });
     } else if (this.state.pendingID === id) {
       // Increment score
+      console.log("Match id: " + this.state.pendingID);
       this.handleIncrement();
       this.setState({
         pendingID: ""
@@ -136,6 +136,8 @@ class App extends Component {
       correct: 0,
       pendingID: ""
     });
+    unshuffledHiraArr = [];
+    unshuffledEnglArr = [];
     this.combineNewArray(initCardsArr);
   };
 

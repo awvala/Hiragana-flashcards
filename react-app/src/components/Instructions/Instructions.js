@@ -20,7 +20,7 @@ class Instructions extends Component {
                         <li>Click its matching card.</li>
                         <li>If you want to cancel your first selection, simply click on it again to de-activate it.</li>
                     </ul>
-                    <button type="submit" className="btn btn-primary beginButton" onClick={ this.props.handleFormSubmit}>Begin!</button>
+                    <button type="button" className="btn btn-primary beginButton" onClick={ this.props.handleFormSubmit}>Begin!</button>
                 </div>
                 <div className="col-sm-1"></div>
             </div>
