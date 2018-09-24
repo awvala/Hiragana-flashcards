@@ -65,6 +65,8 @@ class App extends Component {
         englCards: englshuffledCards,
         result: ""
       });
+    } else {
+       console.log("Why is this still running!?")
     };
   };
 
@@ -105,6 +107,7 @@ class App extends Component {
         pendingID: ""
       });
     } else {
+      console.log("Not a match, reset board");
       this.handleReset();
     }
   };
@@ -123,8 +126,8 @@ class App extends Component {
       this.setState({
         result: "Well done!"
       });
+      this.shuffleArray();
     }
-    this.shuffleArray();
   };
 
   handleReset = () => {
@@ -158,7 +161,6 @@ class App extends Component {
                 {/*Hiragana cards*/}
                 <CardContainer>
                   {this.state.hiraCards.map((card) => <FlashCard
-                    key = {card[1]}
                     name={card[0]}
                     id={card[1]}
                     status="unmatched"
@@ -172,7 +174,6 @@ class App extends Component {
                 {/*English cards*/}
                 <CardContainer>
                   {this.state.englCards.map((card) => <AnswerCard
-                    key = {card[1]}
                     name={card[0]}
                     id={card[1]}
                     status="unmatched"

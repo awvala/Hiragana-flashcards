@@ -4,7 +4,7 @@ import "./Instructions.css";
 class Instructions extends Component {
     constructor(props) {
         super(props)
-    }
+    };
 
     render() {
 
@@ -27,6 +27,7 @@ class Instructions extends Component {
         )
     };
 }
+
 export default Instructions;
 
 
