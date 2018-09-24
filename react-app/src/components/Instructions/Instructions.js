@@ -18,7 +18,6 @@ class Instructions extends Component {
                     <ul>
                         <li>Click either the Hiragana card or the English card.</li>
                         <li>Click its matching card.</li>
-                        <li>If you want to cancel your first selection, simply click on it again to de-activate it.</li>
                     </ul>
                     <button type="button" className="btn btn-primary beginButton" onClick={ this.props.handleFormSubmit}>Begin!</button>
                 </div>

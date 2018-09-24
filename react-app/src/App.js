@@ -74,7 +74,7 @@ class App extends Component {
   shuffleArray = paramArray => {
     let currentIndex = paramArray.length, tempValue, randomIndex;
 
-    // While there remain elements to shuffle…
+    // While there remain elements to shuffle
     while (0 !== currentIndex) {
 
       // Pick a remaining element…
