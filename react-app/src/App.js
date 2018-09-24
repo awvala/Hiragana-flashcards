@@ -114,11 +114,16 @@ class App extends Component {
       // Increment score if there is a match
       //console.log("Match id: " + this.state.pendingID);
       element.classList.add("matched");
-      element.classList.remove("unmatched");
-      element.classList.remove("pending");
+      element.classList.remove("unmatched", "pending");
       matchElement.classList.add("matched");
-      matchElement.classList.remove("unmatched");
-      matchElement.classList.remove("pending");
+      matchElement.classList.remove("unmatched", "pending");
+      //element.classList.toggle("hidden");
+      //matchElement.classList.toggle("hidden");
+      setTimeout(function () {
+        element.classList.toggle("hidden");
+        matchElement.classList.toggle("hidden");
+      }, 1000);
+
       this.handleIncrement();
       this.setState({
         pendingID: ""

@@ -11,6 +11,13 @@
   box-shadow: 0 3px 6px #999, 0 3px 6px #999;
   animation-name: flip-in-hor-bottom;
   animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+
+.unmatched:hover {
+  animation-name: shadow-inset-center;
+  animation-duration: .8s;
+  animation-fill-mode: forwards;
 }
 
 .unmatched {
@@ -20,6 +27,8 @@
 .matched {
   background-color: #2A77AE;
   color: white;
+  animation-name: slit-out-horizontal;
+  animation-duration: 1s;
 }
 
 .pending {
@@ -27,6 +36,11 @@
   animation-name: color-change-4x;
   animation-duration: 6s;
   animation-iteration-count: infinite;
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
 }
 
 /* ----------------------------------------------
@@ -150,4 +164,89 @@
     display: none;
   }
 }
+
+/**
+ * ----------------------------------------
+ * animation shadow-inset-center
+ * ----------------------------------------
+ */
+ @-webkit-keyframes shadow-inset-center {
+  0% {
+    box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes shadow-inset-center {
+  0% {
+    box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/**
+ * ----------------------------------------
+ * animation shadow-inset-center
+ * ----------------------------------------
+ */
+ @-webkit-keyframes shadow-inset-center {
+  0% {
+    box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes shadow-inset-center {
+  0% {
+    box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: inset 0 0 14px 0px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/**
+ * ----------------------------------------
+ * animation slit-out-horizontal
+ * ----------------------------------------
+ */
+ @-webkit-keyframes slit-out-horizontal {
+  0% {
+    -webkit-transform: translateZ(0) rotateX(0);
+            transform: translateZ(0) rotateX(0);
+    opacity: 1;
+  }
+  54% {
+    -webkit-transform: translateZ(-160px) rotateX(87deg);
+            transform: translateZ(-160px) rotateX(87deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateZ(-800px) rotateX(90deg);
+            transform: translateZ(-800px) rotateX(90deg);
+    opacity: 0;
+  }
+}
+@keyframes slit-out-horizontal {
+  0% {
+    -webkit-transform: translateZ(0) rotateX(0);
+            transform: translateZ(0) rotateX(0);
+    opacity: 1;
+  }
+  54% {
+    -webkit-transform: translateZ(-160px) rotateX(87deg);
+            transform: translateZ(-160px) rotateX(87deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateZ(-800px) rotateX(90deg);
+            transform: translateZ(-800px) rotateX(90deg);
+    opacity: 0;
+  }
+}
+
 
