@@ -7,9 +7,18 @@ Try the demo [here](https://awvala.github.io/Hiragana-flashcards/)
 
 ![GitHub Logo](react-app/public/images/Hiraganaflash.png)
 
+## Technology Used:
+
+* CSS3/HTML5
+* Javascript/JSX/ES6
+* Bootstrap
+* Node/Express
+* NPM/Yarn
+* React
+
 ## Original Assignment:
 
-# Clicky Game
+## Clicky Game
 
 ## Overview
 
