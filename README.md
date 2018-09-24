@@ -1,7 +1,7 @@
 # Hiragana-flashcards
 ## A React Clicky Game
 
-This is a boot camp class project to create a React application memory game.  The original assignment was to create a React based memory game.  I decided to add a an additional challenge to the assignment by creating a flashcard application instead.  Version 1.0 consists of a Hiragana flashcard app, challenging users to match Japanese Hiragana characters with the English pronunciation.
+This is a boot camp class project to create a React application memory game.  The original assignment was to create a React based memory game.  I decided to add an additional challenge to the assignment by creating a flashcard application instead.  Version 1.0 consists of a Hiragana flashcard app, challenging users to match Japanese Hiragana characters with the English pronunciation.
 
 Try the demo [here](https://awvala.github.io/Hiragana-flashcards/)
 
